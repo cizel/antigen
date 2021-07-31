@@ -386,13 +386,13 @@ antigen () {
   local success=false
 
   # If its a specific branch that we want, checkout that branch.
-  local branch="master" # TODO FIX THIS
+  #local branch="master" # TODO FIX THIS
   if [[ $url == *\|* ]]; then
     branch="$(-antigen-parse-branch ${url%|*} ${url#*|})"
   fi
 
   if [[ ! -d $clone_dir ]]; then
-    eval ${ANTIGEN_CLONE_ENV} git clone ${=ANTIGEN_CLONE_OPTS} --branch "$branch" -- "${url%|*}" "$clone_dir" &>> $ANTIGEN_LOG
+    eval ${ANTIGEN_CLONE_ENV} git clone ${=ANTIGEN_CLONE_OPTS} "$branch" -- "${url%|*}" "$clone_dir" &>> $ANTIGEN_LOG
     success=$?
   elif $update; then
     # Save current revision.
